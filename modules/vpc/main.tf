@@ -1,9 +1,9 @@
 resource "aws_vpc" "terraform_vpc" {
-  cidr_block       = var.vpc_cidr_block
+  cidr_block = var.vpc_cidr_block
   instance_tenancy = "default"
 
   tags = {
-    Name = "terraform-vpc"
+    Name = "vpc"
   }
 }
 
@@ -11,13 +11,13 @@ resource "aws_vpc" "terraform_vpc" {
 //puclic subnet --1
 
 resource "aws_subnet" "public_subnet_terraform1" {
-  vpc_id     = aws_vpc.terraform_vpc.id
+  vpc_id = aws_vpc.terraform_vpc.id
   cidr_block = var.public_subnet_1_cidr
   availability_zone = var.public_subnet_1_az
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "public_subnet_terraform_1"
+    Name = "public_subnet"
   }
 }
 
@@ -40,13 +40,13 @@ resource "aws_route_table_association" "public_assoc1" {
 //puclic subnet --2
 
 resource "aws_subnet" "public_subnet_terraform2" {
-  vpc_id     = aws_vpc.terraform_vpc.id
+  vpc_id = aws_vpc.terraform_vpc.id
   cidr_block = var.public_subnet_2_cidr
   availability_zone = var.public_subnet_2_az
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "public_subnet_terraform_2"
+    Name = "public_subnet"
   }
 }
 
@@ -90,7 +90,7 @@ resource "aws_subnet" "private_subnet_terraform1" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name = "private_subnet_terraform"
+    Name = "private_subnet"
   }
 }
 
@@ -139,7 +139,7 @@ resource "aws_subnet" "private_subnet_terraform2" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name = "private_subnet_terraform"
+    Name = "private_subnet"
   }
 }
 

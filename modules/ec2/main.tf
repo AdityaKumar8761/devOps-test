@@ -9,23 +9,28 @@ resource "aws_security_group" "security_group" {
 
 resource "aws_vpc_security_group_ingress_rule" "ingressPorts" {
   security_group_id = aws_security_group.security_group.id
-  from_port         = 8080
-  ip_protocol        = "tcp"
-  to_port           = 8080
-  cidr_ipv4         = "0.0.0.0/0"
+  from_port = 8080
+  ip_protocol = "tcp"
+  to_port = 8080
+  cidr_ipv4 = "0.0.0.0/0"
 }
 
 resource "aws_vpc_security_group_egress_rule" "allow_all_traffic_ipv4" {
   security_group_id = aws_security_group.security_group.id
-  cidr_ipv4         = "0.0.0.0/0"
-  ip_protocol       = "-1" 
+  cidr_ipv4 = "0.0.0.0/0"
+  ip_protocol = "-1" 
 }
 
 resource "aws_instance" "ec2" {
-  ami           = var.ami
+  ami = var.ami
+
+
   instance_type = var.instance_type
+
   associate_public_ip_address = true
+
   availability_zone = var.ec2AvailabilityZone
+  
   root_block_device {
     delete_on_termination = true
     volume_size = var.ebsSize
@@ -54,6 +59,6 @@ resource "aws_instance" "ec2" {
               //Sir this part ^^^ is something i copy and pasted from gpt
 
   tags = {
-    Name = "ClassTest"
+    Name = "private ec in vpc"
   }
 }
